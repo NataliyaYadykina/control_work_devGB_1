@@ -52,6 +52,19 @@ class NoteBook:
                         search_result[id] = note_info
         return search_result
 
+    def delete_note(self, note_info: dict, id_note) -> int:
+        confirm = 0
+        if note_info:
+            confirm = int(input('Подтверждаете удаление?\n1. Да\n2. Нет\nВыберите действие: '))
+            if confirm == 1:
+                self.dict.pop(id_note, None)
+                print(f'Заметка #{id_note} успешно удалена.')
+            else:
+                print('Действие отменено.')
+        else:
+            print('Такой заметки не найдено! Проверьте правильность введенного id.')
+        return confirm
+
     # Сохранение данных словаря в файл .json и экспорт в текстовый файл
     def save(self):
         json.dump(self.dict, open(self.path, 'w', encoding='utf-8'), ensure_ascii=False)
@@ -62,4 +75,4 @@ class NoteBook:
         print(str_note)
         with open(self.export_path, 'w', encoding = 'utf-8') as f:
             f.write(str_note)
-        print('Заметки успешно сохранены в файл.')
+        print('Изменения успешно сохранены в файл.')

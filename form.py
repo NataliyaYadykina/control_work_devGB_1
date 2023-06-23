@@ -26,4 +26,4 @@ get_note = Form(text_fields.data_new_note)
 get_date_note_for_search = Form(text_fields.note_date_for_search)
 
 # Получение id заметки для поиска
-get_id_note_for_search = Form(text_fields.note_id_for_search)
+get_id_note = Form(text_fields.note_id_for_search)
