@@ -21,3 +21,4 @@ class Menu:
                 print(f'ОШИБКА! Введите значения от 1 до {length}:')
 
 main_menu = Menu(text_fields.main_menu)
+search_menu = Menu(text_fields.search_menu)

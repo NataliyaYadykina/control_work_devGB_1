@@ -39,6 +39,19 @@ class NoteBook:
         self.dict[str(max_id + 1)] = [note.title, note.content, note.add_date, '']
         print(f'\nЗаметка #{max_id + 1} успешно добавлена!\n')
 
+    # Поиск заметки
+    def search_note(self, type_search: int, search_text: str) -> dict:
+        search_result = {}
+        for id, note_info in self.dict.items():
+            if type_search == 1:
+                if search_text == id:
+                    search_result[id] = note_info
+            elif type_search == 2:
+                for item in note_info:
+                    if search_text in item:
+                        search_result[id] = note_info
+        return search_result
+
     # Сохранение данных словаря в файл .json и экспорт в текстовый файл
     def save(self):
         json.dump(self.dict, open(self.path, 'w', encoding='utf-8'), ensure_ascii=False)
