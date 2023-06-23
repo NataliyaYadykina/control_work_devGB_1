@@ -19,7 +19,7 @@ def process_func():
                 choice = search_menu.show()
                 search_text = []
                 if choice == 1:
-                    search_text = get_id_note_for_search.get_data()
+                    search_text = get_id_note.get_data()
                 elif choice == 2:
                     search_text = get_date_note_for_search.get_data()
                 if choice != 3:
@@ -32,7 +32,11 @@ def process_func():
             case 4:
                 print('edit note')
             case 5:
-                print('delete note')
+                id_note = get_id_note.get_data()
+                check_id_note = nb.search_note(1, id_note[0])
+                confirm = nb.delete_note(check_id_note, id_note[0])
+                if confirm == 1:
+                    check_new_data = True
             case 6:
                 nb.save()
                 check_new_data = False
