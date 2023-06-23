@@ -11,12 +11,20 @@ def process_func():
             msg = 'ВНИМАНИЕ! Сохраните внесенные изменения в файл!'
             div = '*' * len(msg)
             print(div, msg, div, sep='\n')
-        menu_main = main_menu.show()
-        match menu_main:
+        action = main_menu.show()
+        match action:
             case 1:
                 nb.show_notes(nb.dict)
             case 2:
-                print('find note')
+                choice = search_menu.show()
+                search_text = []
+                if choice == 1:
+                    search_text = get_id_note_for_search.get_data()
+                elif choice == 2:
+                    search_text = get_date_note_for_search.get_data()
+                if choice != 3:
+                    search_result = nb.search_note(choice, search_text[0])
+                    nb.show_notes(search_result)
             case 3:
                 data_note = get_note.get_data()
                 nb.add_note(data_note)

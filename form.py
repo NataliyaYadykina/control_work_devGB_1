@@ -19,5 +19,11 @@ class Form:
                     print('Поле не должно быть пустым!')
         return data_note
 
-# Получение данных заметки
+# Получение данных заметки для добавления
 get_note = Form(text_fields.data_new_note)
+
+# Получение даты заметки для поиска
+get_date_note_for_search = Form(text_fields.note_date_for_search)
+
+# Получение id заметки для поиска
+get_id_note_for_search = Form(text_fields.note_id_for_search)
