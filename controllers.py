@@ -1,11 +1,14 @@
 from menu import *
+from notebook import *
+
+nb = NoteBook('bd.json', 'note_book.txt')
 
 def process_func():
     while True:
         menu_main = main_menu.show()
         match menu_main:
             case 1:
-                print('show all notes')
+                nb.show_notes(nb.dict)
             case 2:
                 print('find note')
             case 3:
