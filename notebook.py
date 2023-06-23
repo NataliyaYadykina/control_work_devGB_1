@@ -38,3 +38,15 @@ class NoteBook:
             max_id = 0
         self.dict[str(max_id + 1)] = [note.title, note.content, note.add_date, '']
         print(f'\nЗаметка #{max_id + 1} успешно добавлена!\n')
+
+    # Сохранение данных словаря в файл .json и экспорт в текстовый файл
+    def save(self):
+        json.dump(self.dict, open(self.path, 'w', encoding='utf-8'), ensure_ascii=False)
+        str_note = ''
+        for id, note_info in self.dict.items():
+            str_note += f'{id}. {note_info[0]}\n   {note_info[1]}\n   Дата создания: {note_info[2]}\n   Дата изменения: {note_info[3]}\n'
+            str_note += '\n'
+        print(str_note)
+        with open(self.export_path, 'w', encoding = 'utf-8') as f:
+            f.write(str_note)
+        print('Заметки успешно сохранены в файл.')
