@@ -4,7 +4,7 @@ class Note:
     def __init__(self, data_note: list) -> None:
         self.title = data_note[0]
         self.content = data_note[1]
-        self.add_date = str(data_note[2]).split('.')[0]
+        self.add_date = str(datetime.now()).split('.')[0]
         self.edit_date = ""
 
     def __str__(self) -> str:

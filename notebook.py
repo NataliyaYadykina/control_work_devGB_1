@@ -29,3 +29,12 @@ class NoteBook:
             for id, note_info in data_notes.items():
                 print(f'{id}. {note_info[0]}\n   {note_info[1]}\n   Дата создания: {note_info[2]}\n   Дата изменения: {note_info[3]}')
 
+    # Добавление заметки
+    def add_note(self, data_note):
+        note = Note(data_note)
+        if self.dict:
+            max_id = int(max(self.dict, key=int))
+        else:
+            max_id = 0
+        self.dict[str(max_id + 1)] = [note.title, note.content, note.add_date, '']
+        print(f'\nЗаметка #{max_id + 1} успешно добавлена!\n')
