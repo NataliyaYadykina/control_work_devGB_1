@@ -30,7 +30,15 @@ def process_func():
                 nb.add_note(data_note)
                 check_new_data = True
             case 4:
-                print('edit note')
+                id_note = get_id_note.get_data()
+                check_id_note = nb.search_note(1, id_note[0])
+                if check_id_note:
+                    print('Введите новые данные или оставьте поле пустым: ')
+                    data_note = get_note.get_data(edit = True)
+                    if not nb.edit_note(data_note, id_note[0]):
+                        check_new_data = True
+                else:
+                    print('Заметка не найдена. Проверьте корректность введенного id.')
             case 5:
                 id_note = get_id_note.get_data()
                 check_id_note = nb.search_note(1, id_note[0])

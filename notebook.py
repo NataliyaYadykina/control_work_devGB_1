@@ -1,6 +1,7 @@
 import json
 import os
 from note import Note
+from datetime import datetime
 
 class NoteBook:
     def __init__(self, path: str, export_path: str) -> None:
@@ -10,7 +11,7 @@ class NoteBook:
         self.dict = self.load()
 
     # Получение данных из файла .json в словарь
-    def load(self):
+    def load(self) -> dict:
         if os.stat(self.path).st_size == 0:
             notes_db = {}
         else:
@@ -18,7 +19,7 @@ class NoteBook:
         return notes_db
 
     # Просмотр заметок
-    def show_notes(self, data_notes):
+    def show_notes(self, data_notes: dict) -> None:
         title = 'Все заметки'
         separ = '-' * len(title)
         print(separ, title, separ, sep='\n')
@@ -30,7 +31,7 @@ class NoteBook:
                 print(f'{id}. {note_info[0]}\n   {note_info[1]}\n   Дата создания: {note_info[2]}\n   Дата изменения: {note_info[3]}')
 
     # Добавление заметки
-    def add_note(self, data_note):
+    def add_note(self, data_note: list) -> None:
         note = Note(data_note)
         if self.dict:
             max_id = int(max(self.dict, key=int))
@@ -52,6 +53,16 @@ class NoteBook:
                         search_result[id] = note_info
         return search_result
 
+    def edit_note(self, new_data_note: list, id_note: str) -> None:
+        note = Note(new_data_note)
+        if note.title:
+            self.dict[id_note][0] = note.title
+        if note.content:
+            self.dict[id_note][1] = note.content
+        self.dict[id_note][3] = str(datetime.now()).split('.')[0]
+        if not note.title and not note.content: return 1
+        print(f'\nЗаметка #{id_note} успешно изменена!\n')
+
     def delete_note(self, note_info: dict, id_note) -> int:
         confirm = 0
         if note_info:
@@ -66,7 +77,7 @@ class NoteBook:
         return confirm
 
     # Сохранение данных словаря в файл .json и экспорт в текстовый файл
-    def save(self):
+    def save(self) -> None:
         json.dump(self.dict, open(self.path, 'w', encoding='utf-8'), ensure_ascii=False)
         str_note = ''
         for id, note_info in self.dict.items():
