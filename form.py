@@ -5,14 +5,14 @@ class Form:
         self.text_field = text_field
 
     # Получение данных заметки от пользователя
-    def get_data(self):
+    def get_data(self, edit = False) -> list:
         data_note = []
         list_fields = self.text_field.split('\n')
         for field in list_fields:
             flag = True
             while flag:
                 data_str = input(field)
-                if data_str:
+                if data_str or edit:
                     data_note.append(data_str)
                     flag = False
                 else:
